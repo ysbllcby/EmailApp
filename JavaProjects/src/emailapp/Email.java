@@ -9,6 +9,7 @@ public class Email {
 	private String department;
 	private int mailboxCapacity;
 	private String alternateEmail;
+	private int defaultPasswordLength = 5;
 	
 
 	// Constructor for firstName and lastName
@@ -23,12 +24,13 @@ public class Email {
 		System.out.println("DEPARTMENT: " + department);
 		
 		// Method call for random password generation
+		this.password = generateRandomPassword(defaultPasswordLength);
+		System.out.println("PASSWORD: " + password);
 	}
 	
 	// Ask for department
 	private String setDepartment() {
-		System.out.println("DEPARTMENT CODE FOR " + firstName + " "
-				+ lastName + "'s " + "department:\n1 Sales\n2 Development\n"
+		System.out.println("DEPARTMENT CODE:\n" + "\n1 Sales\n2 Development\n"
 						+ "3 Accounting\n0 None");
 		Scanner in = new Scanner(System.in);
 		int deptChoice = in.nextInt();
@@ -44,9 +46,14 @@ public class Email {
 	}
 	
 	// Generate random password
-	private String generateRandomPasswprd(int length) {
-		
-		return password;
+	private String generateRandomPassword(int length) {
+		String passwordSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+		char[] password = new char[length];
+		for (int i = 0; i < length; i++) {
+			int rand = (int) (Math.random() * passwordSet.length());
+			password[i] = passwordSet.charAt(rand);
+		}
+		return new String(password);
 	}
 	
 	// Set mailboxCapacity
